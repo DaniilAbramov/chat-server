@@ -1,11 +1,27 @@
 import dao.UserDao;
 import dao.UserDaoImpl;
 import services.MyServer;
+import utils.Props;
 
-public class MyApp   {
+import java.io.IOException;
+import java.util.Properties;
+
+public class MyApp {
 
     public static void main(String[] args) {
         new MyServer().start();
+
+        Properties props = new Properties();
+
+        try {
+            props.load(MyApp.class.getResourceAsStream("application.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+        System.out.println("props.getProperty(\"user\") = " + Props.getValue("db.user"));
 
 //        UserDao dao = new UserDaoImpl();
 //        dao.findByName("");

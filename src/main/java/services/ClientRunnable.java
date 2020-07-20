@@ -1,5 +1,7 @@
 package services;
 
+import dao.MessageDao;
+import dao.MessageDaoImpl;
 import dao.UserDao;
 import dao.UserDaoImpl;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ public class ClientRunnable implements Runnable, Observer {
     private final MyServer server;
     private User client;
     private final UserDao dao = new UserDaoImpl();
+    private final MessageDao messageDao = new MessageDaoImpl();
 
     @SneakyThrows
     @Override

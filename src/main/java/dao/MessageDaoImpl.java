@@ -2,7 +2,7 @@ package dao;
 
 import lombok.SneakyThrows;
 import model.Message;
-import model.User;
+import utils.Props;
 
 import java.sql.*;
 
@@ -30,23 +30,23 @@ public class MessageDaoImpl implements MessageDao {
     @SneakyThrows
     @Override
     public void setUserMessage(String text, Integer idUser) {
-        getStatement().executeUpdate("UPDATE message SET text ='" + text + "' where '" + idUser + "'");
+        getStatement().executeUpdate("UPDATE message SET text ='" + text + "' where '" + idUser + "';");
 
     }
 
     @SneakyThrows
     @Override
     public Message deleteMessage(Integer id, String text) {
-        getStatement().executeUpdate("DELETE from message WHERE '" + id + "'and '" + text + "'");
+        getStatement().executeUpdate("DELETE from message WHERE '" + id + "'and '" + text + "';");
         System.out.println("deleted successful");
         return null;
     }
 
 
     private Statement getStatement() throws SQLException {
-        String DB_URL = "jdbc:MySQL://localhost:3306/my_schema?serverTimezone=UTC";
-        String DB_USER = "root";
-        String DB_PASSWORD = "root";
+        String DB_URL = Props.getValue("db.url");
+        String DB_USER = Props.getValue("db.user");
+        String DB_PASSWORD = Props.getValue("db.password");
         Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
         return connection.createStatement();
     }

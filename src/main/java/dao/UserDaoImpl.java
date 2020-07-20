@@ -2,13 +2,14 @@ package dao;
 
 import lombok.SneakyThrows;
 import model.User;
+import utils.Props;
 
 import java.sql.*;
 
 public class UserDaoImpl implements UserDao {
-    private final String DB_URL = "jdbc:MySQL://localhost:3306/my_schema?serverTimezone=UTC";
-    private final String DB_USER = "root";
-    private final String DB_PASSWORD = "root";
+    private final String DB_URL = Props.getValue("db.url");
+    private final String DB_USER = Props.getValue("db.user");
+    private final String DB_PASSWORD = Props.getValue("db.password");
 
     @SneakyThrows
     @Override
