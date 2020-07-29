@@ -5,7 +5,7 @@ import model.User;
 public interface UserDao {
     User findByName(String name);
 
-    void setUserPassword(String name, String password);
+    void setUserPassword(User user, String password);
 
     void createUser(User user);
 

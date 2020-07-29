@@ -1,14 +1,13 @@
 package dao;
 
 import model.Message;
+import model.User;
+
+import java.util.List;
 
 public interface MessageDao {
 
-    Message findByMessage(Message message);
+    List<Message> findAllByUser(User user);
 
-    void createMessage(Message message);
-
-    void setUserMessage(String text, Integer idUser);
-
-    Message deleteMessage(Integer id, String text);
+    void createMessage(Message message, User user);
 }

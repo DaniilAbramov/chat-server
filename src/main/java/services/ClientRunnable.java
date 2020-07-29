@@ -1,7 +1,5 @@
 package services;
 
-import dao.MessageDao;
-import dao.MessageDaoImpl;
 import dao.UserDao;
 import dao.UserDaoImpl;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +15,6 @@ public class ClientRunnable implements Runnable, Observer {
     private final MyServer server;
     private User client;
     private final UserDao dao = new UserDaoImpl();
-    private final MessageDao messageDao = new MessageDaoImpl();
 
     @SneakyThrows
     @Override
@@ -53,7 +50,7 @@ public class ClientRunnable implements Runnable, Observer {
         if ((userFromDao = dao.findByName(loginFromClient)) != null) {
             if (userFromDao.getPassword().equals(passwordFromClient)) {
                 client = userFromDao;
-                notifyObserver("Authorization: successfully");
+                notifyObserver("Authorization successfully");
             } else {
                 notifyObserver("Authorization failed: wrong password");
                 server.deletedObserver(this);

@@ -32,15 +32,15 @@ public class UserDaoImpl implements UserDao {
 
     @SneakyThrows
     @Override
-    public void setUserPassword(String name, String password) {
-        getStatement().executeUpdate("UPDATE user SET password = '" + password + "' WHERE login = '" + name + "'");
+    public void setUserPassword(User user, String password) {
+        getStatement().executeUpdate("UPDATE user SET password = '" + password + "' WHERE login = '" + user.getName() + "'");
         System.out.println("Password update");
     }
 
     @SneakyThrows
     @Override
     public void setUserName(User user, String name) {
-        getStatement().executeUpdate("UPDATE user SET login = '" + user.getName() + "' WHERE login = '" + name + "'");
+        getStatement().executeUpdate("UPDATE user SET login = '" + name + "' WHERE login = '" + user.getName() + "'");
         System.out.println("Name update");
 
     }
@@ -48,9 +48,8 @@ public class UserDaoImpl implements UserDao {
     @SneakyThrows
     @Override
     public User deleteUser(String name, String password) {
-        getStatement().executeUpdate("DELETE from user WHERE '" + name + "'" + ",'" + password + "'");
+        getStatement().executeUpdate("DELETE from user WHERE '" + name + "','" + password + "'");
         System.out.println("deleted successful");
-
         return null;
     }
 
